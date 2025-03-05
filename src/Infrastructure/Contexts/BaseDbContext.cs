@@ -15,6 +15,7 @@ public abstract class BaseDbContext : MultiTenantIdentityDbContext<ApplicationUs
 
     protected BaseDbContext(IMultiTenantContextAccessor<ABCSchoolTenantInfo> tenantContextAccessor, DbContextOptions options) : base(tenantContextAccessor, options)
     {
+        TenantInfo = tenantContextAccessor.MultiTenantContext.TenantInfo;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
