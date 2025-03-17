@@ -1,3 +1,4 @@
+using Domain.Entities;
 using Finbuckle.MultiTenant;
 using Infrastructure.Identity.Models;
 using Microsoft.AspNetCore.Identity;
@@ -63,6 +64,21 @@ internal class DbConfigurations
         public void Configure(EntityTypeBuilder<IdentityUserToken<string>> builder)
         {
             builder.ToTable("UserTokens", "Identity").IsMultiTenant();
+        }
+    }
+
+    internal class SchoolConfig : IEntityTypeConfiguration<School>
+    {
+        public void Configure(EntityTypeBuilder<School> builder)
+        {
+            builder
+                .ToTable("Schools", "Academics")
+                .IsMultiTenant();
+
+            builder
+                .Property(school => school.Name)
+                .IsRequired()
+                .HasMaxLength(60);
         }
     }
 }
